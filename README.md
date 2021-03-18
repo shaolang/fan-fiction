@@ -7,6 +7,9 @@ the API.__ The current version only supports [Reagent][reagent].
 
 ## Quick Start
 
+`fan-fiction` does not include [Reagent][reagent] as its dependency, so
+add both as the development dependency to your tool of choice.
+
 `fan-fiction.reagent` contains two macros:
 
 * `foreword`: creates the `default` property that [Storybook][storybook]
