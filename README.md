@@ -1,4 +1,4 @@
-# fan-fiction
+# fan-fiction [![Clojars Project](https://img.shields.io/clojars/v/fan-fiction.svg)](https://clojars.org/fan-fiction)
 
 Write [Storybook][storybook] in ClojureScript with ease.
 
