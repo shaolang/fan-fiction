@@ -33,7 +33,7 @@ add both as the development dependency to your tool of choice.
 `hide-controls` is an alias of the longer `hideNoControlsWarning` setting.
 The equivalent [Component Story Format (CSF)][csf] in JavaScript is as follows:
 
-```javascipt
+```javascript
 import React from 'react';
 import { Greeting } from './greeting';
 
