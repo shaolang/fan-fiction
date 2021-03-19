@@ -30,6 +30,7 @@ add both as the development dependency to your tool of choice.
 (defstory hello-world [greeting "World"])
 ```
 
+`hide-controls` is an alias of the longer `hideNoControlsWarning` setting.
 The equivalent [Component Story Format (CSF)][csf] in JavaScript is as follows:
 
 ```javascipt
@@ -38,7 +39,8 @@ import { Greeting } from './greeting';
 
 export default {
   title: 'Greeting component',
-  component: Greeting
+  component: Greeting,
+  parameters: {controls: {hideNoControlsWarning: false}}
 };
 
 export const HelloWorld = () => <Greeting name='World' />;
