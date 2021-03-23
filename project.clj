@@ -1,4 +1,4 @@
-(defproject fan-fiction "0.1.0"
+(defproject fan-fiction "0.2.0-SNAPSHOT"
   :description "Write Storybook in ClojureScript with ease"
   :url "https://github.com/shaolang/fan-fiction"
   :license {:name "MIT License"
