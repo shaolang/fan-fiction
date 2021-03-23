@@ -1,8 +1,8 @@
 (ns fan-fiction.reagent)
 
-(defmacro foreword [& {:keys [hide-controls component]
-                       :as   opts
-                       :or   {hide-controls true}}]
+(defmacro front-matter [& {:keys [hide-controls component]
+                           :as   opts
+                           :or   {hide-controls true}}]
   (let [opts (-> opts
                  (assoc-in [:parameters :controls :hideNoControlsWarning]
                            hide-controls)
