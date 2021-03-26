@@ -14,15 +14,19 @@
 
 
 (defmacro defstory
-  ([story-name bindings comp-instance]
+  ([story-name comp-instance-or-render-fn]
+   (defstory story-name [] comp-instance-or-render-fn))
+
+  ([story-name bindings comp-instance-or-render-fn]
    `(def ~(with-meta story-name {:export true})
       (let ~bindings
         (fn []
-          (reagent.core/as-element ~comp-instance)))))
+          ~(cond
+            (vector? comp-instance-or-render-fn)
+            `(reagent.core/as-element ~comp-instance-or-render-fn)
 
-  ([story-name comp-instance-or-render-fn]
-   `(def ~(with-meta story-name {:export true})
-      (fn []
-        ~(if (vector? comp-instance-or-render-fn)
-           `(reagent.core/as-element ~comp-instance-or-render-fn)
-           `(reagent.core/as-element [~comp-instance-or-render-fn]))))))
+            (fn? comp-instance-or-render-fn)
+            `(reagent.core/as-element [~comp-instance-or-render-fn])
+
+            :else
+            `(reagent.core/as-element [#(~comp-instance-or-render-fn)])))))))
