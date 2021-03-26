@@ -67,6 +67,19 @@ That four-liner above expands to the following:
       [:h1 greeting @person "!"])))
 ```
 
+### Arbitrary body
+
+`defstory` also allows arbitrary body, as long as it ultimately returns
+Reagent hiccup:
+
+```clojure
+(defstory hello
+  [person {:greeting "Hi" :person "World"}]     ;; binding for form-2
+
+  (let [{:keys [greeting person]} person]       ;; arbitrary body that return
+    [:h1 greeting ", " person "!"]))            ;; Reagent hiccup
+```
+
 ## License
 
 Copyright © 2021 Shaolang Ai
@@ -76,3 +89,4 @@ Distributed under the MIT License
 [storybook]: https://storybook.js.org
 [reagent]: https://reagent-project.github.io
 [csf]: https://storybook.js.org/docs/react/writing-stories/introduction#component-story-format
+[args]: https://storybook.js.org/docs/react/writing-stories/args
