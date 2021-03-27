@@ -1,11 +1,16 @@
-*jar
+*.jar
+*.swp
+.classpath
 .cpcache/
 .lein-deps-sum
 .lein-plugins/
 .lein-repl-history
 .nrepl-port
+.project
 .rebel_readline_history
 .repl
+.settings/
+resources/public/js
 /classes/
 /lib/
 /out/
