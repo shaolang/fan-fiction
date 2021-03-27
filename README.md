@@ -45,41 +45,6 @@ export default {
 
 export const HelloWorld = () => <Greeting name='World' />;
 ```
-
-### Reagent Form-2
-
-`defstory` supports creating a Reagent Form-2 story, as shown below:
-
-```clojure
-(defstory hello
-  [greeting "Hi, "
-   person   (atom "world")]
-  [:h1 greeting @person "!"])
-```
-
-That four-liner above expands to the following:
-
-```clojure
-(def ^:export hello
-  (let [greeting  "Hi, "
-        person    (atom "world")]
-    (fn []
-      [:h1 greeting @person "!"])))
-```
-
-### Arbitrary body
-
-`defstory` also allows arbitrary body, as long as it ultimately returns
-Reagent hiccup:
-
-```clojure
-(defstory hello
-  [person {:greeting "Hi" :person "World"}]     ;; binding for form-2
-
-  (let [{:keys [greeting person]} person]       ;; arbitrary body that return
-    [:h1 greeting ", " person "!"]))            ;; Reagent hiccup
-```
-
 ## License
 
 Copyright © 2021 Shaolang Ai
