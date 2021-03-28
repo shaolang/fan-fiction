@@ -1,6 +1,6 @@
 (ns fan-fiction.reagent-test
   (:require [cljs.test :refer [are]]
-            [devcards.core :refer [deftest]]
+            [devcards.core :refer [defcard deftest]]
             [fan-fiction.reagent :refer [defstory]]
             reagent.core))
 
@@ -30,3 +30,9 @@
                         [(clojure.core/fn []
                            (let [v (:v dokie)]
                              [:span "okie dokie, " v]))]))))))
+
+(defstory hello [:h1 "Hello, World!"])
+
+(defcard rendering-story-with-simple-reagent-component
+  "Renders the hello world created using defstory"
+  (hello))
