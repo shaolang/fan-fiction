@@ -36,3 +36,13 @@
 (defcard rendering-story-with-simple-reagent-component
   "Renders the hello world created using defstory"
   (hello))
+
+(defstory okie
+  [dokie {:v "artichokie"}]
+  (let [v (:v dokie)]
+    [:h1 "okie dokie, " v]))
+
+(defcard rendering-story-with-let-binding
+  "Renders the okie-dokie story created using the 3-arity version of defstory
+   that takes bindings"
+  (okie))
