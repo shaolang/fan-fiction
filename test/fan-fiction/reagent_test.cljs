@@ -43,6 +43,13 @@
   "Renders the hi function component created using defstory"
   (hi))
 
+
+(defstory goodbye [person "Shijie"] [:h1 person])
+
+(defcard render-goodbye-story
+  "Renders hiccup component that uses let-binding in destory"
+  (goodbye))
+
 (defstory okie
   [dokie {:v "artichokie"}]
   (let [v (:v dokie)]
