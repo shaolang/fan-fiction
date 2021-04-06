@@ -59,5 +59,17 @@
 
 (defcard renders-okie-dokie-story
   "Renders the okie-dokie story where defstory uses let bindings and
-   returns hiccip that is again wrapped in another let-binding"
+   returns hiccup that is again wrapped in another let-binding"
   (okie))
+
+
+(defstory easy-peasy
+  [phrase "lemon squeezy"]
+  (fn []
+    (let [to-render (str "easy peasy, " phrase)]
+      [:h1 to-render])))
+
+(defcard renders-easy-peasy-story
+  "Renders the easy-peasy story where defstory uses let bindings and
+   returns function that uses the value in the let-binding"
+  (easy-peasy))
