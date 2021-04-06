@@ -8,18 +8,19 @@
   (are [input expected] (= (macroexpand input)
                            expected)
 
-       '(defstory hello [:h1 "World"])
-       '(def hello (clojure.core/fn [] (reagent.core/as-element [:h1 "World"])))
+       '(defstory hello [:h1 "Hello, World!"])
+       '(def hello (clojure.core/fn []
+                     (reagent.core/as-element [:h1 "Hello, World!"])))
 
-       '(defstory hi (fn [] [:h1 "Sekai"]))
+       '(defstory hi (fn [] [:h1 "Hi, Sekai"]))
        '(def hi (clojure.core/fn []
-                  (reagent.core/as-element [(fn [] [:h1 "Sekai"])])))
+                  (reagent.core/as-element [(fn [] [:h1 "Hi, Sekai"])])))
 
-       '(defstory goodbye [person "Shijie"] [:h1 person])
+       '(defstory goodbye [person "Shijie"] [:h1 "Goodbye, " person])
        '(def goodbye (clojure.core/fn []
                        (clojure.core/let [person "Shijie"]
                          (reagent.core/as-element
-                          [(clojure.core/fn [] [:h1 person])]))))
+                          [(clojure.core/fn [] [:h1 "Goodbye, " person])]))))
 
        '(defstory okie [dokie {:v "artichokie"}]
           (let [v (:v dokie)]
@@ -33,21 +34,22 @@
 
 (defstory hello [:h1 "Hello, World!"])
 
-(defcard rendering-story-with-simple-reagent-component
-  "Renders the hello world created using defstory"
+(defcard renders-hello-story
+  "Renders the hello world story where defstory returns hiccup"
   (hello))
 
-(defstory hi (fn [] [:h1 "Sekai"]))
+(defstory hi (fn [] [:h1 "Hi, Sekai"]))
 
-(defcard rendering-story-of-function-component
-  "Renders the hi function component created using defstory"
+(defcard renders-hi-story
+  "Renders the hi story where defstory returns a function "
   (hi))
 
 
-(defstory goodbye [person "Shijie"] [:h1 person])
+(defstory goodbye [person "Shijie"] [:h1 "Goodbye, " person])
 
-(defcard render-goodbye-story
-  "Renders hiccup component that uses let-binding in destory"
+(defcard renders-goodbye-story
+  "Renders the goodbye story where defstory uses let bindings and
+   returns hiccup"
   (goodbye))
 
 (defstory okie
@@ -55,7 +57,7 @@
   (let [v (:v dokie)]
     [:h1 "okie dokie, " v]))
 
-(defcard rendering-story-with-let-binding
-  "Renders the okie-dokie story created using the 3-arity version of defstory
-   that takes bindings"
+(defcard renders-okie-dokie-story
+  "Renders the okie-dokie story where defstory uses let bindings and
+   returns hiccip that is again wrapped in another let-binding"
   (okie))
