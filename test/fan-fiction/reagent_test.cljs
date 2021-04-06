@@ -37,6 +37,12 @@
   "Renders the hello world created using defstory"
   (hello))
 
+(defstory hi (fn [] [:h1 "Sekai"]))
+
+(defcard rendering-story-of-function-component
+  "Renders the hi function component created using defstory"
+  (hi))
+
 (defstory okie
   [dokie {:v "artichokie"}]
   (let [v (:v dokie)]
