@@ -16,7 +16,7 @@
                                   [devcards                   "0.2.7"]
                                   [org.clojure/clojure        "1.10.3"
                                    :scope "provided"]
-                                  [org.clojure/clojurescript  "1.10.844"
+                                  [org.clojure/clojurescript  "1.10.773"
                                    :scope "provided"]
                                   [reagent                    "1.0.0"
                                    :scope "provided"]]
