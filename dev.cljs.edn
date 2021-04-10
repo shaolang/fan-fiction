@@ -1,2 +1,0 @@
-^{:watch-dirs ["src"]}
-{:main fan-fiction.reagent}

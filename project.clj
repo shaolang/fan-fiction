@@ -9,7 +9,6 @@
   :source-paths ["src"]
 
   :aliases {"fig"       ["run" "-m" "figwheel.main"]
-            "fig:build" ["run" "-m" "figwheel.main" "-b" "dev" "-r"]
             "fig:test"  ["run" "-m" "figwheel.main" "-b" "test" "-r"]}
 
   :profiles {:dev {:dependencies [[com.bhauman/figwheel-main  "0.2.12"]
