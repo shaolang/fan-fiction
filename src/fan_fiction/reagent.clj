@@ -12,16 +12,15 @@
                         :component
                         `(reagent.core/reactify-component ~component))))))
 
-(defmacro defstory
-  [story-name & form]
+(defmacro defstory [story-name & form]
   (let [[a b]         form
-        [letbs comp]  (if (nil? b)
+        [letbs# comp] (if (nil? b)
                         [[] a]
                         [a b])
-        comp          (if (vector? comp)
+        comp#         (if (vector? comp)
                         comp
                         `(vector (fn [] ~comp)))]
     `(def ~(with-meta story-name {:export true})
        (fn []
-         (let ~letbs
-           (reagent.core/as-element ~comp))))))
+         (let ~letbs#
+           (reagent.core/as-element ~comp#))))))
