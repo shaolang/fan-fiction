@@ -12,17 +12,16 @@
                         :component
                         `(reagent.core/reactify-component ~component))))))
 
-
 (defmacro defstory
-  ([story-name comp-instance-or-render-fn]
-   `(def ~(with-meta story-name {:export true})
-      (fn []
-        ~(if (vector? comp-instance-or-render-fn)
-           `(reagent.core/as-element ~comp-instance-or-render-fn)
-           `(reagent.core/as-element [~comp-instance-or-render-fn])))))
-
-  ([story-name bindings comp-instance-or-render-fn]
-   `(def ~(with-meta story-name {:export true})
-      (fn []
-        (let ~bindings
-          (reagent.core/as-element [(fn [] ~comp-instance-or-render-fn)]))))))
+  [story-name & form]
+  (let [[a b]         form
+        [letbs comp]  (if (nil? b)
+                        [[] a]
+                        [a b])
+        comp          (if (vector? comp)
+                        comp
+                        `(vector (fn [] ~comp)))]
+    `(def ~(with-meta story-name {:export true})
+       (fn []
+         (let ~letbs
+           (reagent.core/as-element ~comp))))))

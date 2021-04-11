@@ -1,7 +1,7 @@
 (ns fan-fiction.reagent-test
   (:require [cljs.test :refer [are]]
             [devcards.core :refer [defcard deftest]]
-            [fan-fiction.reagent :refer [defstory]]
+            [fan-fiction.reagent :refer [defstory story]]
             reagent.core))
 
 (deftest defstory-macro-expansions
@@ -10,17 +10,21 @@
 
        '(defstory hello [:h1 "Hello, World!"])
        '(def hello (clojure.core/fn []
-                     (reagent.core/as-element [:h1 "Hello, World!"])))
+                     (clojure.core/let []
+                       (reagent.core/as-element [:h1 "Hello, World!"]))))
 
        '(defstory hi (fn [] [:h1 "Hi, Sekai"]))
        '(def hi (clojure.core/fn []
-                  (reagent.core/as-element [(fn [] [:h1 "Hi, Sekai"])])))
+                  (clojure.core/let []
+                    (reagent.core/as-element
+                     (clojure.core/vector
+                      (clojure.core/fn []
+                        (fn [] [:h1 "Hi, Sekai"])))))))
 
        '(defstory goodbye [person "Shijie"] [:h1 "Goodbye, " person])
        '(def goodbye (clojure.core/fn []
                        (clojure.core/let [person "Shijie"]
-                         (reagent.core/as-element
-                          [(clojure.core/fn [] [:h1 "Goodbye, " person])]))))
+                         (reagent.core/as-element [:h1 "Goodbye, " person]))))
 
        '(defstory okie [dokie {:v "artichokie"}]
           (let [v (:v dokie)]
@@ -28,9 +32,11 @@
        '(def okie (clojure.core/fn []
                     (clojure.core/let [dokie {:v "artichokie"}]
                       (reagent.core/as-element
-                        [(clojure.core/fn []
-                           (let [v (:v dokie)]
-                             [:span "okie dokie, " v]))]))))))
+                       (clojure.core/vector
+                        (clojure.core/fn []
+                          (let [v (:v dokie)]
+                            [:span "okie dokie, " v])))))))))
+
 
 (defstory hello [:h1 "Hello, World!"])
 
