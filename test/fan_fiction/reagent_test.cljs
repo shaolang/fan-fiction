@@ -17,9 +17,7 @@
        '(def hi (clojure.core/fn []
                   (clojure.core/let []
                     (reagent.core/as-element
-                     (clojure.core/vector
-                      (clojure.core/fn []
-                        (fn [] [:h1 "Hi, Sekai"])))))))
+                     [(fn [] [:h1 "Hi, Sekai"])]))))
 
        '(defstory goodbye [person "Shijie"] [:h1 "Goodbye, " person])
        '(def goodbye (clojure.core/fn []
@@ -32,10 +30,9 @@
        '(def okie (clojure.core/fn []
                     (clojure.core/let [dokie {:v "artichokie"}]
                       (reagent.core/as-element
-                       (clojure.core/vector
-                        (clojure.core/fn []
+                       [(clojure.core/fn []
                           (let [v (:v dokie)]
-                            [:span "okie dokie, " v])))))))))
+                            [:span "okie dokie, " v]))]))))))
 
 
 (defstory hello [:h1 "Hello, World!"])

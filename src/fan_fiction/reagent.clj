@@ -17,9 +17,10 @@
         [letbs# comp] (if (nil? b)
                         [[] a]
                         [a b])
-        comp#         (if (vector? comp)
-                        comp
-                        `(vector (fn [] ~comp)))]
+        comp#         (cond
+                       (vector? comp)       comp
+                       (= (first comp) 'fn) [comp]
+                       :else                `[(fn [] ~comp)])]
     `(def ~(with-meta story-name {:export true})
        (fn []
          (let ~letbs#
