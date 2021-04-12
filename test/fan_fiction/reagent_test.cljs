@@ -1,7 +1,7 @@
 (ns fan-fiction.reagent-test
   (:require [cljs.test :refer [are]]
             [devcards.core :refer [defcard deftest]]
-            [fan-fiction.reagent :refer [defstory story]]
+            [fan-fiction.reagent :refer [defstory]]
             reagent.core))
 
 (deftest defstory-macro-expansions
