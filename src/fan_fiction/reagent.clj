@@ -12,17 +12,25 @@
                         :component
                         `(reagent.core/reactify-component ~component))))))
 
+
 (defmacro defstory [story-name & form]
-  (let [[a b]         form
-        [letbs# comp] (if (nil? b)
-                        [nil a]
-                        [a b])
-        comp#         (cond
-                       (or letbs# (vector? comp))   comp
-                       (= (first comp) 'fn)         [comp]
-                       :else                        `[(fn [] ~comp)])]
-    `(def ~(with-meta story-name {:export true})
-       (fn []
+  (let [[a b c]             form
+        [letbs# comp opts]  (cond
+                             (nil? b)                 [nil a nil]
+                             (and (nil? c) (map? b))  [nil a b]
+                             (nil? c)                 [a b nil]
+                             :else                    [a b c])
+        args                (:args opts)
+        params              (if args `[~'args] [])
+        comp#               (cond
+                             (or letbs# (vector? comp))   comp
+                             (= (first comp) 'fn)         [comp]
+                             :else                        `[(fn [] ~comp)])]
+    `(do
+       (def ~(with-meta story-name {:export true})
+       (fn ~params
          ~(if letbs#
             `(let ~letbs# (reagent.core/as-element [(fn [] ~comp#)]))
-            `(reagent.core/as-element ~comp#))))))
+            `(reagent.core/as-element ~comp#))))
+       ~(when args
+          `(goog.object/set ~story-name "args" (~'clj->js {:args ~args}))))))
