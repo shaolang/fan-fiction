@@ -10,19 +10,17 @@
 
        '(defstory hello [:h1 "Hello, World!"])
        '(def hello (clojure.core/fn []
-                     (clojure.core/let []
-                       (reagent.core/as-element [:h1 "Hello, World!"]))))
+                     (reagent.core/as-element [:h1 "Hello, World!"])))
 
        '(defstory hi (fn [] [:h1 "Hi, Sekai"]))
        '(def hi (clojure.core/fn []
-                  (clojure.core/let []
-                    (reagent.core/as-element
-                     [(fn [] [:h1 "Hi, Sekai"])]))))
+                  (reagent.core/as-element [(fn [] [:h1 "Hi, Sekai"])])))
 
        '(defstory goodbye [person "Shijie"] [:h1 "Goodbye, " person])
        '(def goodbye (clojure.core/fn []
                        (clojure.core/let [person "Shijie"]
-                         (reagent.core/as-element [:h1 "Goodbye, " person]))))
+                         (reagent.core/as-element
+                          [(clojure.core/fn [] [:h1 "Goodbye, " person])]))))
 
        '(defstory okie [dokie {:v "artichokie"}]
           (let [v (:v dokie)]
@@ -32,7 +30,19 @@
                       (reagent.core/as-element
                        [(clojure.core/fn []
                           (let [v (:v dokie)]
-                            [:span "okie dokie, " v]))]))))))
+                            [:span "okie dokie, " v]))]))))
+       '(defstory text-input
+          [value      (reagent.core/atom "hello, world")
+           on-change  (fn [e] (reset! value (.. e -target -value)))]
+          [:input {:value @value :on-change on-change}])
+       '(def text-input
+          (clojure.core/fn []
+            (clojure.core/let [value      (reagent.core/atom "hello, world")
+                               on-change  (fn [e]
+                                            (reset! value (.. e -target -value)))]
+              (reagent.core/as-element
+               [(clojure.core/fn []
+                  [:input {:value @value :on-change on-change}])]))))))
 
 
 (defstory hello [:h1 "Hello, World!"])
@@ -76,3 +86,16 @@
   "Renders the easy-peasy story where defstory uses let bindings and
    returns function that uses the value in the let-binding"
   (easy-peasy))
+
+
+(defstory text-input
+  [value      (reagent.core/atom "hello, world")
+   on-change  (fn [e]
+                (enable-console-print!)(println (.. e -target -value))
+                (reset! value (.. e -target -value)))]
+  [:input {:value @value :on-change on-change}])
+
+
+(defcard renders-interactive-text-input
+  "Renders an input field that updates the atom its value is stored in"
+  (text-input))

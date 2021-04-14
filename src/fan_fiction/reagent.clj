@@ -15,13 +15,14 @@
 (defmacro defstory [story-name & form]
   (let [[a b]         form
         [letbs# comp] (if (nil? b)
-                        [[] a]
+                        [nil a]
                         [a b])
         comp#         (cond
-                       (vector? comp)       comp
-                       (= (first comp) 'fn) [comp]
-                       :else                `[(fn [] ~comp)])]
+                       (or letbs# (vector? comp))   comp
+                       (= (first comp) 'fn)         [comp]
+                       :else                        `[(fn [] ~comp)])]
     `(def ~(with-meta story-name {:export true})
        (fn []
-         (let ~letbs#
-           (reagent.core/as-element ~comp#))))))
+         ~(if letbs#
+            `(let ~letbs# (reagent.core/as-element [(fn [] ~comp#)]))
+            `(reagent.core/as-element ~comp#))))))
