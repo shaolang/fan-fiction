@@ -90,9 +90,7 @@
 
 (defstory text-input
   [value      (reagent.core/atom "hello, world")
-   on-change  (fn [e]
-                (enable-console-print!)(println (.. e -target -value))
-                (reset! value (.. e -target -value)))]
+   on-change  (fn [e] (reset! value (.. e -target -value)))]
   [:input {:value @value :on-change on-change}])
 
 
