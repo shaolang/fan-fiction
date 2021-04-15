@@ -11,11 +11,11 @@
   :aliases {"fig"       ["run" "-m" "figwheel.main"]
             "fig:test"  ["run" "-m" "figwheel.main" "-b" "test" "-r"]}
 
-  :profiles {:dev {:dependencies [[com.bhauman/figwheel-main  "0.2.12"]
+  :profiles {:dev {:dependencies [[com.bhauman/figwheel-main  "0.2.13"]
                                   [devcards                   "0.2.7"]
                                   [org.clojure/clojure        "1.10.3"
                                    :scope "provided"]
-                                  [org.clojure/clojurescript  "1.10.773"
+                                  [org.clojure/clojurescript  "1.10.844"
                                    :scope "provided"]
                                   [reagent                    "1.0.0"
                                    :scope "provided"]]
