@@ -10,10 +10,12 @@
 .rebel_readline_history
 .repl
 .settings/
-resources/public/js
+.shadow-cljs/
 /classes/
 /lib/
 /out/
 /target/
+node_modules/
 pom.xml
 pom.xml.asc
+resources/public/js
