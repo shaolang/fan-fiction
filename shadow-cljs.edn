@@ -1,0 +1,14 @@
+{:source-paths
+ ["src" "stories"]
+
+ :dependencies
+ [[reagent      "1.0.0"]
+
+  ; dev-deps
+  [fan-fiction  "0.2.0-SNAPSHOT"]]
+
+ :builds
+ {:stories  {:asset-path    "js/"
+             :entries       [fan-fiction.stories.input-field]
+             :output-dir    "target/js"
+             :target        :npm-module}}}
