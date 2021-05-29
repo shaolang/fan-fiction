@@ -45,6 +45,17 @@ export default {
 
 export const HelloWorld = () => <Greeting name='World' />;
 ```
+
+### Using with Shadow-CLJS
+
+If you are using [Shadow-CLJS][shadow-cljs], note that `fan-fiction` works with
+version 2.11.x only: 2.12.x and above upgraded closure-library to a newer
+version that makes the generated JavaScript "unusable" by Storybook.
+
+Set `:target` as `:npm-module` in the `shadow-cljs.edn` and list the
+stories' namespaces under `:entries`. Refer to
+[shadow-cljs.edn](./shadow-cljs.edn) for an example.
+
 ## License
 
 Copyright © 2021 Shaolang Ai
@@ -55,3 +66,4 @@ Distributed under the MIT License
 [reagent]: https://reagent-project.github.io
 [csf]: https://storybook.js.org/docs/react/writing-stories/introduction#component-story-format
 [args]: https://storybook.js.org/docs/react/writing-stories/args
+[shadow-cljs]: https://github.com/thheller/shadow-cljs
