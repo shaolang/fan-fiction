@@ -48,9 +48,9 @@ export const HelloWorld = () => <Greeting name='World' />;
 
 ### Using with Shadow-CLJS
 
-If you are using [Shadow-CLJS][shadow-cljs], note that `fan-fiction` works with
-version 2.11.x only: 2.12.x and above upgraded closure-library to a newer
-version that makes the generated JavaScript "unusable" by Storybook.
+If you are using [Shadow-CLJS][shadow-cljs], note that `fan-fiction` doesn't
+work with version 2.12.x (for some unknown reason). As of this writing,
+version 2.15.8 works well.
 
 Set `:target` as `:npm-module` in the `shadow-cljs.edn` and list the
 stories' namespaces under `:entries`. Refer to
