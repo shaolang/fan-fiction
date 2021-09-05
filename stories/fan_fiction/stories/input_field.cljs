@@ -4,16 +4,25 @@
             [reagent.core :as r]))
 
 
-(front-matter :title          "Input Field"
+(front-matter :title          "different ways to use defstory"
               :component      input-field
               :hide-controls  true)
 
 
-(defstory non-interactive-rendering
-  [input-field "Hello, World!" (constantly nil)])
+(defstory straight-component-rendering
+  [input-field "Not interactive" (constantly nil)])
 
 
-(defstory interactive-rendering
-  [value      (r/atom "initial value")
+(defstory let-like-binding-with-interaction
+  [value      (r/atom "interactive")
    on-change  (fn [e] (reset! value (.. e -target -value)))]
   [input-field @value on-change])
+
+
+(defstory functional-component-rendering
+  (fn [] [input-field "functional" (constantly nil)]))
+
+
+(defstory native-let-binding
+  (let [val "used Clojure's let macro"]
+    [input-field val (constantly nil)]))
