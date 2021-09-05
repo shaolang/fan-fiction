@@ -1,14 +1,22 @@
 {:source-paths
- ["src" "stories"]
+ ["src" "stories" "test"]
 
  :dependencies
  [[reagent      "1.1.0"]
 
   ; dev-deps
-  [fan-fiction  "0.2.0-SNAPSHOT"]]
+  [lambdaisland/chui  "1.0.179"]
+  [fan-fiction        "0.2.0-SNAPSHOT"]]
+
+ :dev-http {8089 "target"}
 
  :builds
- {:stories  {:asset-path    "/js"
-             :entries       [fan-fiction.stories.input-field]
-             :output-dir    "target/js"
-             :target        :npm-module}}}
+ {:stories  {:asset-path  "/js"
+             :entries     [fan-fiction.stories.input-field]
+             :output-dir  "target/js"
+             :target      :npm-module}
+  :tests    {:asset-path  "/js"
+             :ns-regexp   "-test$"
+             :runner-ns   lambdaisland.chui.shadow.browser-runner
+             :target      :browser-test
+             :test-dir    "target"}}}

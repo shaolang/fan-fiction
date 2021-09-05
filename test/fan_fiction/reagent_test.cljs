@@ -1,6 +1,5 @@
 (ns fan-fiction.reagent-test
-  (:require [cljs.test :refer [are]]
-            [devcards.core :refer [defcard deftest]]
+  (:require [cljs.test :refer [are deftest]]
             [fan-fiction.reagent :refer [defstory]]
             reagent.core))
 
@@ -68,66 +67,3 @@
               args-demo
               "args"
               (clj->js {:args {:text "Hello, from args demo!"}})))))
-
-
-(defstory hello [:h1 "Hello, World!"])
-
-(defcard renders-hello-story
-  "Renders the hello world story where defstory returns hiccup"
-  (hello))
-
-(defstory hi (fn [] [:h1 "Hi, Sekai"]))
-
-(defcard renders-hi-story
-  "Renders the hi story where defstory returns a function "
-  (hi))
-
-
-(defstory goodbye [person "Shijie"] [:h1 "Goodbye, " person])
-
-(defcard renders-goodbye-story
-  "Renders the goodbye story where defstory uses let bindings and
-   returns hiccup"
-  (goodbye))
-
-(defstory okie
-  [dokie {:v "artichokie"}]
-  (let [v (:v dokie)]
-    [:h1 "okie dokie, " v]))
-
-(defcard renders-okie-dokie-story
-  "Renders the okie-dokie story where defstory uses let bindings and
-   returns hiccup that is again wrapped in another let-binding"
-  (okie))
-
-
-(defstory easy-peasy
-  [phrase "lemon squeezy"]
-  (fn []
-    (let [to-render (str "easy peasy, " phrase)]
-      [:h1 to-render])))
-
-(defcard renders-easy-peasy-story
-  "Renders the easy-peasy story where defstory uses let bindings and
-   returns function that uses the value in the let-binding"
-  (easy-peasy))
-
-
-(defstory text-input
-  [value      (reagent.core/atom "hello, world")
-   on-change  (fn [e] (reset! value (.. e -target -value)))]
-  [:input {:value @value :on-change on-change}])
-
-
-(defcard renders-interactive-text-input
-  "Renders an input field that updates the atom its value is stored in"
-  (text-input))
-
-
-(defstory args-demo
-  [:h1 (:text args) "!"]
-  {:args {:text "not used"}})
-
-
-(defcard renders-args-demo
-  (args-demo {:text "Hello, from args demo"}))

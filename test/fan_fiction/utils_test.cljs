@@ -1,6 +1,5 @@
 (ns fan-fiction.utils-test
-  (:require [cljs.test :refer [are]]
-            [devcards.core :refer [deftest]]
+  (:require [cljs.test :refer [are deftest]]
             [fan-fiction.utils :as utils]))
 
 

@@ -1,7 +1,0 @@
-^{:watch-dirs ["src" "test"]}
-{:devcards  true
- :main                  fan-fiction.test-runner
- :asset-path            "js/devcards_out"
- :output-to             "resources/public/js/fan-fiction_devcards.js"
- :output-dir            "resources/public/js/devcards_out"
- :source-map-timestamp  true}
