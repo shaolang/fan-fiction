@@ -53,7 +53,8 @@ work with version 2.12.x (for some unknown reason). As of this writing,
 version 2.15.8 works well.
 
 Set `:target` as `:npm-module` in the `shadow-cljs.edn` and list the
-stories' namespaces under `:entries`. Refer to
+stories' namespaces under `:entries`. Alternatively, specify the stories'
+namespace (regexp) pattern using `:ns-regexp`. Refer to
 [shadow-cljs.edn](./shadow-cljs.edn) for an example.
 
 ## License
